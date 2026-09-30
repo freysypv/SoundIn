@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.soundin.ui.screens.LoginScreen
 import com.example.soundin.ui.screens.MainScreen
+import com.example.soundin.ui.screens.RegisterScreen
 
 
 @Composable
@@ -30,13 +31,20 @@ fun SoundInNavGraph(
             )
         }
         composable(SoundInRoutes.REGISTER) {
+            // Register Screen
+            RegisterScreen(
+                onNavigateToLogin = {
+                    navController.navigate(SoundInRoutes.LOGIN)
+                }
+            )
 
-            navController.navigate(route = SoundInRoutes.LOGIN) {
-                popUpTo (route = SoundInRoutes.REGISTER) { inclusive = true }
-            }
         }
         composable(SoundInRoutes.MAIN) {
             MainScreen()
         }
+
+
+
+
     }
 }

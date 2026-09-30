@@ -7,18 +7,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.soundin.ui.navigation.SoundInNavGraph
 import com.example.soundin.ui.theme.SoundinTheme
 
 class MainActivity : ComponentActivity() {
-    val navController: NavHostController
-        @Composable
-        get() = rememberNavController()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -28,6 +22,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+
+                   val navController = rememberNavController()
                     SoundInNavGraph(navController = navController)
                 }
             }
