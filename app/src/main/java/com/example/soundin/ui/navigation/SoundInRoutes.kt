@@ -1,6 +1,6 @@
 package com.example.soundin.ui.navigation
 
-import com.example.soundin.ui.models.PlayListRepository
+import com.example.soundin.ui.models.PlaylistRepository
 
 object SoundInRoutes {
     const val LOGIN = "login"

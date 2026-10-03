@@ -17,11 +17,18 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.soundin.ui.components.BottomNavigationBar
+import com.example.soundin.ui.models.Playlist
 import com.example.soundin.ui.navigation.SoundInRoutes
 import com.example.soundin.ui.theme.SoundinTheme
+import com.example.soundin.ui.viewModel.UserSessionViewModel
 
 @Composable
-fun MainScreen() {
+fun MainScreen(
+    sessionViewModel: UserSessionViewModel,
+    onLogout: () -> Unit,
+    onNavigateToPlaylistDetail: (Playlist) -> Unit
+) {
+
     val navController = rememberNavController()// manage the connection between the screens
     val currentBackStackEntry by navController.currentBackStackEntryAsState()// get the current route
     val currentRoute = currentBackStackEntry?.destination?.route // save the current route
@@ -49,18 +56,16 @@ fun MainScreen() {
             startDestination = SoundInRoutes.LIBRARY,
             modifier = Modifier.padding(paddingValues)
         ){
-            composable ( route = SoundInRoutes.LIBRARY){ LibraryScreen()}
+            composable ( route = SoundInRoutes.LIBRARY){ LibraryScreen(onNavigateToPlaylistDetail = onNavigateToPlaylistDetail) }
             composable ( route = SoundInRoutes.SEARCH){ SearchScreen()}
-            composable ( route = SoundInRoutes.PROFILE){ ProfileScreen()}
+            composable ( route = SoundInRoutes.PROFILE){
+                ProfileScreen(
+                sessionViewModel = sessionViewModel,
+                onLogout = onLogout
+            )}
         }
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun MainScreenPreview() {
-//    SoundinTheme {
-//        MainScreen()
-//    }
-//}
+
 

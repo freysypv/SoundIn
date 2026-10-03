@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-object PlayListRepository {
+object PlaylistRepository {
     private val _playLists = MutableStateFlow(
         value = listOf(
             Playlist(id = 1, name ="Favourites",     genre = "Rock",      15, "#E91E63", isFavorite = true),
@@ -35,7 +35,7 @@ object PlayListRepository {
             else it
         }
     }
-    fun deletePlayList(playlist: Playlist){
+    fun deletePlaylist(playlist: Playlist){
         _playLists.value = _playLists.value.filter { it.id != playlist.id }
     }
 }

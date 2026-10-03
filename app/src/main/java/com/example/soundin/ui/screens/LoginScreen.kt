@@ -55,17 +55,21 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.soundin.R
 import com.example.soundin.ui.viewModel.LoginViewModel
+import com.example.soundin.ui.viewModel.UserSessionViewModel
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
     viewModel: LoginViewModel = viewModel(),
+    sessionViewModel: UserSessionViewModel,
     onNavigateToRegister: () -> Unit,
     onLoginSuccess: () -> Unit
+
+
 ) {
     // Snackbar state -- lives here, not inside LoginContent
-    val snackbarHostState = remember { SnackbarHostState() }
+    val snackBarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
 
     // State from ViewModel -- collect each StateFlow and convert it to Compose state
@@ -86,7 +90,7 @@ fun LoginScreen(
             )
         }, // end topBar
         snackbarHost = {
-            SnackbarHost(hostState = snackbarHostState) { data ->
+            SnackbarHost(hostState = snackBarHostState) { data ->
                 // Only the validation error snackbar has an action label
                 val isError = data.visuals.actionLabel != null
                 Snackbar(
@@ -114,16 +118,20 @@ fun LoginScreen(
                 val isValid = viewModel.validateAndLogin()
                 scope.launch {
                     if (isValid) {
-                        // showSnackbar suspends until the snackbar goes away,
+                        // showSnackBar suspends until the snackBar goes away,
                         // so the user sees the welcome message before we navigate
-                        snackbarHostState.showSnackbar(
+                        snackBarHostState.showSnackbar(
                             message = "Welcome to SoundIn",
                             actionLabel = "Dismiss",
                             duration = SnackbarDuration.Short
                         )
+                        sessionViewModel.login(
+                            name = "John Doe",
+                            email = email
+                        )
                         onLoginSuccess()
                     } else {
-                        snackbarHostState.showSnackbar(
+                        snackBarHostState.showSnackbar(
                             message = "Please review the marked fields",
                             actionLabel = "Dismiss",
                             duration = SnackbarDuration.Short
@@ -281,8 +289,3 @@ fun LoginContent(
     } // end Column for LoginContent
 } // end LoginContent()
 
-@Preview(showBackground = true)
-@Composable
-fun LoginScreenPreview() {
-    LoginScreen(onNavigateToRegister = {}, onLoginSuccess = {})
-}
