@@ -50,7 +50,7 @@ fun PlaylistDetailScreen(
                 .padding(innerPadding),
           contentAlignment = Alignment.Center
         ){
-            Text(text = "Playlist context coming soon")
+            Text(text = "Playlist Detail - Coming Soon")
         }
     }
 }

@@ -56,10 +56,7 @@ fun SoundInNavGraph(
                     }// end navigate
                 },// end onLogout
                 onNavigateToPlaylistDetail = {playlist ->
-                    navController.navigate( route = "playlistDetail/${playlist.id}"
-
-
-                    )
+                    navController.navigate( route = "playlistDetail/${playlist.id}")
                 }
             )
         }

@@ -32,54 +32,56 @@ fun PlaylistCard(
     playlist: Playlist,
     onClick: () -> Unit,
     onLongClick: () -> Unit,
-){
+) {
 
-    Card(modifier = Modifier
-        .fillMaxWidth()
-        .aspectRatio(1f)
-        .combinedClickable(
-            onClick = onClick,
-            onLongClick = onLongClick
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(1f)
+            .combinedClickable(
+                onClick = onClick,
+                onLongClick = onLongClick
 
-    ),
-      elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     )
-        {
-            Column(modifier = Modifier.fillMaxWidth()) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f)
-                        .background(Color(playlist.colorHex.toColorInt())),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.MusicNote,
-                        contentDescription = "Playlist Cover",
-                        tint = White.copy(alpha = 0.3f),
-                            modifier = Modifier.size(32.dp)
-                    )
-                    Column (modifier = Modifier.padding(16.dp))
-                    {
-                        Text(
-                            text = playlist.name,
-                            style = MaterialTheme.typography.titleMedium,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                        Text(
-                            text = "${playlist.songCount} songs",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+    {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+                    .background(Color(playlist.colorHex.toColorInt())),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Default.MusicNote,
+                    contentDescription = "Playlist Cover",
+                    tint = White.copy(alpha = 0.3f),
+                    modifier = Modifier.size(32.dp)
+                )
+            }
+            Column(modifier = Modifier.padding(16.dp))
+            {
+                Text(
+                    text = playlist.name,
+                    style = MaterialTheme.typography.titleMedium,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Text(
+                    text = "${playlist.songCount} songs",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
 
 
-                        )
-                    }
-
-                }
+                )
             }
 
+
         }
+
+    }
 }
 
 
